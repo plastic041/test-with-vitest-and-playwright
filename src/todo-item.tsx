@@ -7,36 +7,37 @@ import { todosAtom } from "./stores/todos";
 import { useAtom } from "jotai";
 import { motion, AnimatePresence } from "framer-motion";
 import { formatDate } from "./lib/date-format";
+import { forwardRef } from "react";
 
 type TodoItemProps = {
   todo: Todo;
 };
 
-export function TodoItem({ todo }: TodoItemProps) {
-  const [todos, setTodos] = useAtom(todosAtom);
-  const isComplete = todo.completedAt !== undefined;
+export const TodoItem = forwardRef<HTMLLIElement, TodoItemProps>(
+  function TodoItem({ todo }, ref) {
+    const [todos, setTodos] = useAtom(todosAtom);
+    const isComplete = todo.completedAt !== undefined;
 
-  function handleToggle(id: Todo["id"]) {
-    setTodos(toggle(id, todos));
-  }
+    function handleToggle(id: Todo["id"]) {
+      setTodos(toggle(id, todos));
+    }
 
-  function handleEdit(id: Todo["id"], event: ChangeEvent<HTMLInputElement>) {
-    const content = event.currentTarget.value;
-    setTodos(edit(id, content, todos));
-  }
+    function handleEdit(id: Todo["id"], event: ChangeEvent<HTMLInputElement>) {
+      const content = event.currentTarget.value;
+      setTodos(edit(id, content, todos));
+    }
 
-  function handleRemove(id: Todo["id"]) {
-    setTodos(remove(id, todos));
-  }
+    function handleRemove(id: Todo["id"]) {
+      setTodos(remove(id, todos));
+    }
 
-  return (
-    <AnimatePresence key={todo.id}>
+    return (
       <motion.li
+        ref={ref}
         layout
-        layoutId={todo.id}
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
         className="flex flex-row items-center group"
       >
         <input
@@ -94,6 +95,6 @@ export function TodoItem({ todo }: TodoItemProps) {
           <span className="i-radix-icons-trash text-red-500" />
         </IconButton>
       </motion.li>
-    </AnimatePresence>
-  );
-}
+    );
+  }
+);

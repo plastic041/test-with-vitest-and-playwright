@@ -3,7 +3,7 @@ import { useAtom } from "jotai";
 import { add } from "./lib/todos";
 import type { KeyboardEvent } from "react";
 import { TodoItem } from "./todo-item";
-import { motion, MotionConfig } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 export function TodoList() {
   const [todos, setTodos] = useAtom(todosAtom);
@@ -31,17 +31,12 @@ export function TodoList() {
           }}
         />
       </motion.div>
-      <ul className="flex flex-col gap-2 mt-4">
-        <MotionConfig
-          transition={{
-            type: "spring",
-            duration: 0.45,
-          }}
-        >
+      <ul className="flex flex-col mt-4 gap-2">
+        <AnimatePresence initial={false} mode="popLayout">
           {todos.map((todo) => (
             <TodoItem key={todo.id} todo={todo} />
           ))}
-        </MotionConfig>
+        </AnimatePresence>
       </ul>
     </div>
   );
