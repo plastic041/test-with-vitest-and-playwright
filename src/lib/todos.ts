@@ -8,7 +8,7 @@ export function toggle(id: Todo["id"], todos: Todo[]): Todo[] {
   return produce(todos, (draft) => {
     const todo = draft.find((todo) => todo.id === id);
     if (todo) {
-      todo.completedAt = todo.completedAt ? undefined : new Date().toString();
+      todo.completedAt = todo.completedAt ? undefined : new Date().getTime();
     }
   });
 }
@@ -30,7 +30,6 @@ export function add(content: Todo["content"], todos: Todo[]): Todo[] {
     draft.push({
       id,
       content,
-      completedAt: new Date().toString(),
     });
   });
 }
@@ -49,4 +48,22 @@ export function edit(
       todo.content = content;
     }
   });
+}
+
+/**
+ * Sorts todos by completedAt, with incomplete todos first.
+ * Incomplete todos are not sorted.
+ * Completed todos are sorted by completedAt, with the most recent first.
+ */
+export function sort(todos: Todo[]): Todo[] {
+  const incompletes = todos.filter((todo) => !todo.completedAt);
+  const completes = todos.filter((todo) => todo.completedAt);
+
+  return [
+    ...incompletes,
+    ...completes.sort((a, b) => {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- we know it's defined
+      return b.completedAt! - a.completedAt!;
+    }),
+  ];
 }

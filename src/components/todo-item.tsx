@@ -1,12 +1,12 @@
-import type { Todo } from "./typings/todo";
-import { IconButton } from "./components/ui/icon-button";
+import type { Todo } from "../typings/todo";
+import { IconButton } from "./ui/icon-button";
 import { clsx } from "clsx";
 import type { ChangeEvent } from "react";
-import { edit, remove, toggle } from "./lib/todos";
-import { todosAtom } from "./stores/todos";
+import { edit, remove, toggle } from "../lib/todos";
+import { todosAtom } from "../stores/todos";
 import { useAtom } from "jotai";
 import { motion, AnimatePresence } from "framer-motion";
-import { formatDate } from "./lib/date-format";
+import { formatDate } from "../lib/date-format";
 import { forwardRef } from "react";
 
 type TodoItemProps = {
@@ -38,30 +38,32 @@ export const TodoItem = forwardRef<HTMLLIElement, TodoItemProps>(
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="flex flex-row items-center group"
+        className="flex flex-row items-center w-full"
       >
         <input
           type="checkbox"
-          checked={isComplete}
-          onChange={() => handleToggle(todo.id)}
-          className="display-none"
+          onClick={() => handleToggle(todo.id)}
+          className="hidden "
           id={`todo-${todo.id}`}
         />
         <label
           htmlFor={`todo-${todo.id}`}
           className={clsx(
-            "flex h-6 w-6 border rounded items-center justify-center cursor-pointer transition-colors",
+            "flex shrink-0 h-6 w-6 border rounded items-center justify-center cursor-pointer transition-colors",
             isComplete
               ? "bg-teal-500 text-white border-transparent hover:bg-teal-400"
               : "bg-white text-teal-500 border-teal-500 hover:bg-teal-100"
           )}
-          aria-hidden
+          aria-label={`Mark ${todo.content} as ${
+            isComplete ? "incomplete" : "completed"
+          }`}
         >
           <span
             className={clsx(
-              "i-radix-icons-check h-4 w-4",
+              "i-radix-icons-check h-4 w-4 pointer-events-none",
               isComplete ? "block" : "hidden"
             )}
+            aria-hidden
           />
         </label>
         <div className="flex flex-row ml-2 flex-1 items-center">
@@ -70,7 +72,7 @@ export const TodoItem = forwardRef<HTMLLIElement, TodoItemProps>(
             value={todo.content}
             onChange={(e) => handleEdit(todo.id, e)}
             className={clsx(
-              "flex-1 outline-none focus:border-blue-200 transition-colors border-b-2 border-transparent text-lg hover:border-teal-300",
+              "flex-1 w-0 outline-none focus:border-blue-200 transition-colors border-b-2 border-transparent text-lg hover:border-teal-300 rounded-none",
               isComplete ? "line-through text-gray-400" : "text-gray-900"
             )}
           />
@@ -81,7 +83,7 @@ export const TodoItem = forwardRef<HTMLLIElement, TodoItemProps>(
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.15 }}
-                className="ml-2 text-gray-400 text-xs"
+                className="ml-2 text-gray-400 text-xs break-keep"
               >
                 @{formatDate(new Date(todo.completedAt))}
               </motion.span>
@@ -90,7 +92,8 @@ export const TodoItem = forwardRef<HTMLLIElement, TodoItemProps>(
         </div>
         <IconButton
           onClick={() => handleRemove(todo.id)}
-          className="group-hover:opacity-100 opacity-0 transition-opaticy ml-2"
+          className="ml-2 shrink-0"
+          aria-label={`Remove ${todo.content}`}
         >
           <span className="i-radix-icons-trash text-red-500" />
         </IconButton>
