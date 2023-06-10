@@ -38,12 +38,12 @@ export const TodoItem = forwardRef<HTMLLIElement, TodoItemProps>(
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="flex flex-row items-center w-full"
+        className="w-full flex flex-row items-center"
       >
         <input
           type="checkbox"
           onClick={() => handleToggle(todo.id)}
-          className="hidden "
+          className="hidden"
           id={`todo-${todo.id}`}
         />
         <label
@@ -66,7 +66,7 @@ export const TodoItem = forwardRef<HTMLLIElement, TodoItemProps>(
             aria-hidden
           />
         </label>
-        <div className="flex flex-row ml-2 flex-1 items-center">
+        <div className="ml-2 flex flex-1 flex-row items-center">
           <input
             type="text"
             value={todo.content}
@@ -83,7 +83,7 @@ export const TodoItem = forwardRef<HTMLLIElement, TodoItemProps>(
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.15 }}
-                className="ml-2 text-gray-400 text-xs break-keep"
+                className="ml-2 break-keep text-xs text-gray-400"
               >
                 @{formatDate(new Date(todo.completedAt))}
               </motion.span>

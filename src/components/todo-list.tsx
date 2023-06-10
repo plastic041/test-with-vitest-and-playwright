@@ -15,25 +15,25 @@ export function TodoList() {
   return (
     <div
       id="todo-list"
-      className="bg-white flex flex-1 p-8 shadow-xl rounded-none md:rounded-md flex-col w-lg max-w-screen overflow-hidden max-h-4xl"
+      className="max-h-4xl max-w-screen w-lg flex flex-1 flex-col overflow-hidden rounded-none bg-white p-8 shadow-xl md:rounded-md"
     >
-      <h2 className="text-6xl mb-4 font-100 select-none cursor-default">
+      <h2 className="mb-4 cursor-default select-none text-6xl font-100">
         TODO
       </h2>
       <NewTodo />
-      <div className="flex flex-row justify-end mt-2">
+      <div className="mt-2 flex flex-row justify-end">
         <button
-          className="flex justify-center items-center h-8 w-16 bg-white hover:bg-teal-100 rounded transition-colors text-teal-900"
+          className="h-8 w-16 flex items-center justify-center border border-teal-500 rounded bg-white text-teal-900 transition-colors hover:bg-teal-100"
           onClick={handleSort}
         >
           sort
         </button>
       </div>
-      <div className="flex flex-1 flex-col relative">
+      <div className="relative flex flex-1 flex-col">
         <AnimatePresence initial={false}>
           {todos.length > 0 && (
             <motion.ul
-              className="flex flex-col mt-2 gap-2 min-h-0 overflow-y-auto flex-1"
+              className="mt-2 min-h-0 flex flex-1 flex-col gap-2 overflow-y-auto"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -49,7 +49,7 @@ export function TodoList() {
         <AnimatePresence initial={false}>
           {todos.length === 0 && (
             <motion.div
-              className="flex items-center justify-center flex-1 absolute inset-0"
+              className="absolute inset-0 flex flex-1 items-center justify-center"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}

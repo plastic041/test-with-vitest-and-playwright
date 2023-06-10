@@ -16,7 +16,7 @@ export function NewTodo() {
   return (
     <motion.div layout className="flex flex-row">
       <input
-        className="flex-1 border-b-2 outline-none focus:border-blue-300 transition-colors rounded-none"
+        className="flex-1 border-b-2 rounded-none outline-none transition-colors focus:border-blue-300"
         type="text"
         placeholder="Add a todo"
         onKeyDown={(e) => {
