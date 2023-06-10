@@ -1,9 +1,9 @@
-import { forwardRef } from "react";
+import { forwardRef } from 'react'
 
 export const IconButton = forwardRef<
   HTMLButtonElement,
   React.ButtonHTMLAttributes<HTMLButtonElement>
->(function IconButton({ children, className, ...props }, ref) {
+>(({ children, className, ...props }, ref) => {
   return (
     <button
       ref={ref}
@@ -12,5 +12,5 @@ export const IconButton = forwardRef<
     >
       {children}
     </button>
-  );
-});
+  )
+})

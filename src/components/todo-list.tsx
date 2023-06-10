@@ -1,15 +1,15 @@
-import { todosAtom } from "../stores/todos";
-import { useAtom } from "jotai";
-import { TodoItem } from "./todo-item";
-import { AnimatePresence, motion } from "framer-motion";
-import { NewTodo } from "./new-todo";
-import { sort } from "../lib/todos";
+import { useAtom } from 'jotai'
+import { AnimatePresence, motion } from 'framer-motion'
+import { todosAtom } from '../stores/todos'
+import { sort } from '../lib/todos'
+import { TodoItem } from './todo-item'
+import { NewTodo } from './new-todo'
 
 export function TodoList() {
-  const [todos, setTodos] = useAtom(todosAtom);
+  const [todos, setTodos] = useAtom(todosAtom)
 
   function handleSort() {
-    setTodos(sort(todos));
+    setTodos(sort(todos))
   }
 
   return (
@@ -39,7 +39,7 @@ export function TodoList() {
               exit={{ opacity: 0 }}
             >
               <AnimatePresence initial={false} mode="popLayout">
-                {todos.map((todo) => (
+                {todos.map(todo => (
                   <TodoItem key={todo.id} todo={todo} />
                 ))}
               </AnimatePresence>
@@ -60,5 +60,5 @@ export function TodoList() {
         </AnimatePresence>
       </div>
     </div>
-  );
+  )
 }

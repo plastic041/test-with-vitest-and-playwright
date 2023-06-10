@@ -1,5 +1,5 @@
-import { Title } from "./components/title";
-import { TodoList } from "./components/todo-list";
+import { Title } from './components/title'
+import { TodoList } from './components/todo-list'
 
 export function App() {
   return (
@@ -7,5 +7,5 @@ export function App() {
       <Title />
       <TodoList />
     </div>
-  );
+  )
 }

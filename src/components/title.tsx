@@ -1,7 +1,7 @@
-import { useTitle } from "../hooks/use-title";
+import { useTitle } from '../hooks/use-title'
 
 export function Title() {
-  useTitle();
+  useTitle()
 
-  return null;
+  return null
 }

@@ -1,16 +1,16 @@
-import { todosAtom } from "../stores/todos";
-import { useAtom } from "jotai";
-import { add } from "../lib/todos";
-import type { KeyboardEvent } from "react";
-import { motion } from "framer-motion";
+import { useAtom } from 'jotai'
+import type { KeyboardEvent } from 'react'
+import { motion } from 'framer-motion'
+import { add } from '../lib/todos'
+import { todosAtom } from '../stores/todos'
 
 export function NewTodo() {
-  const [todos, setTodos] = useAtom(todosAtom);
+  const [todos, setTodos] = useAtom(todosAtom)
 
   function handleAdd(event: KeyboardEvent<HTMLInputElement>) {
-    const content = event.currentTarget.value;
-    setTodos(add(content, todos));
-    event.currentTarget.value = "";
+    const content = event.currentTarget.value
+    setTodos(add(content, todos))
+    event.currentTarget.value = ''
   }
 
   return (
@@ -20,13 +20,12 @@ export function NewTodo() {
         type="text"
         placeholder="Add a todo"
         onKeyDown={(e) => {
-          if (e.key === "Enter" && e.currentTarget.value !== "") {
-            handleAdd(e);
-          }
+          if (e.key === 'Enter' && e.currentTarget.value !== '')
+            handleAdd(e)
         }}
         name="new todo"
         aria-label="Add a Todo"
       />
     </motion.div>
-  );
+  )
 }
