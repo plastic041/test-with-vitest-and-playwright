@@ -42,7 +42,7 @@ export function Counter({ initial = 0 }: CounterProps) {
             })
           }
         >
-          <span className="i-radix-icons-plus" />
+          <span className="i-lucide-plus" />
         </Button>
         <Button
           aria-label="decrement"
@@ -57,7 +57,7 @@ export function Counter({ initial = 0 }: CounterProps) {
             })
           }
         >
-          <span className="i-radix-icons-minus" />
+          <span className="i-lucide-minus" />
         </Button>
       </div>
     </div>

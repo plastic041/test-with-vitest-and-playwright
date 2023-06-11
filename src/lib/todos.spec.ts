@@ -11,7 +11,7 @@ function getTodos(): Todo[] {
     {
       id: '2',
       content: 'second todo',
-      completedAt: 1592265600000,
+      completedAt: 1592265600000, // 2020-06-16T00:00:00.000Z
     },
   ]
 }
@@ -38,7 +38,7 @@ describe('todos', () => {
       {
         id: '2',
         content: 'second todo',
-        completedAt: '2020-06-16T00:00:00.000Z',
+        completedAt: 1592265600000,
       },
       {
         id: expect.any(String),
@@ -58,7 +58,7 @@ describe('todos', () => {
       {
         id: '2',
         content: 'second todo',
-        completedAt: '2020-06-16T00:00:00.000Z',
+        completedAt: 1592265600000,
       },
     ])
   })
@@ -70,7 +70,7 @@ describe('todos', () => {
       {
         id: '2',
         content: 'second todo',
-        completedAt: '2020-06-16T00:00:00.000Z',
+        completedAt: 1592265600000,
       },
     ])
   })
@@ -82,12 +82,12 @@ describe('todos', () => {
       {
         id: '1',
         content: 'first todo',
-        completedAt: '2020-08-18T00:00:00.000Z',
+        completedAt: 1597708800000,
       },
       {
         id: '2',
         content: 'second todo',
-        completedAt: '2020-06-16T00:00:00.000Z',
+        completedAt: 1592265600000,
       },
     ])
   })
@@ -118,7 +118,7 @@ describe('todos', () => {
       {
         id: '2',
         content: 'second todo',
-        completedAt: '2020-06-16T00:00:00.000Z',
+        completedAt: 1592265600000,
       },
     ])
   })

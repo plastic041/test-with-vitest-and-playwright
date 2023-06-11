@@ -1,5 +1,5 @@
 import { useAtom } from 'jotai'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, Reorder, motion } from 'framer-motion'
 import { todosAtom } from '../stores/todos'
 import { sort } from '../lib/todos'
 import { TodoItem } from './todo-item'
@@ -15,7 +15,7 @@ export function TodoList() {
   return (
     <div
       id="todo-list"
-      className="max-h-4xl max-w-screen w-lg flex flex-1 flex-col overflow-hidden rounded-none bg-white p-8 shadow-xl md:rounded-md"
+      className="max-h-4xl max-w-screen w-lg flex flex-1 flex-col overflow-y-hidden rounded-none bg-white p-8 shadow-xl md:rounded-md"
     >
       <h2 className="mb-4 cursor-default select-none text-6xl font-100">
         TODO
@@ -23,27 +23,36 @@ export function TodoList() {
       <NewTodo />
       <div className="mt-2 flex flex-row justify-end">
         <button
-          className="h-8 w-16 flex items-center justify-center border border-teal-500 rounded bg-white text-teal-900 transition-colors hover:bg-teal-100"
+          className="h-8 w-20 flex select-none items-center justify-center border border-teal-500 rounded bg-white text-teal-900 transition-colors hover:bg-teal-100"
           onClick={handleSort}
         >
-          sort
+          <span className="i-lucide-sort-desc" />
+          <span className="ml-2">Sort</span>
         </button>
       </div>
-      <div className="relative flex flex-1 flex-col">
+      <div className="relative mt-2 flex flex-1 flex-col overflow-y-hidden">
         <AnimatePresence initial={false}>
           {todos.length > 0 && (
-            <motion.ul
-              className="mt-2 min-h-0 flex flex-1 flex-col gap-2 overflow-y-auto"
+            <motion.div
+              className="flex flex-1 overflow-y-hidden"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
             >
-              <AnimatePresence initial={false} mode="popLayout">
-                {todos.map(todo => (
-                  <TodoItem key={todo.id} todo={todo} />
-                ))}
-              </AnimatePresence>
-            </motion.ul>
+              <Reorder.Group
+                className="flex flex-1 flex-col gap-2 overflow-y-scroll pb-16 pr-5"
+                values={todos}
+                onReorder={setTodos}
+                axis="y"
+                layoutScroll
+              >
+                <AnimatePresence initial={false} mode="popLayout">
+                  {todos.map(todo => (
+                    <TodoItem todo={todo} key={todo.id} />
+                  ))}
+                </AnimatePresence>
+              </Reorder.Group>
+            </motion.div>
           )}
         </AnimatePresence>
         <AnimatePresence initial={false}>
