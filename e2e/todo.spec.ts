@@ -22,7 +22,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 test('has proper title', async ({ page }) => {
-  await page.goto('localhost:5173')
+  await page.goto('localhost:4173')
 
   await expect(page).toHaveTitle('Todos | 0✅ / 0❌')
 
@@ -41,7 +41,7 @@ test('has proper title', async ({ page }) => {
 })
 
 test('removes a todo', async ({ page }) => {
-  await page.goto('localhost:5173')
+  await page.goto('localhost:4173')
 
   // Fill in the new todo input with the value "buy milk"
   await page.getByLabel('Add a Todo').fill('buy milk')
@@ -55,7 +55,7 @@ test('removes a todo', async ({ page }) => {
 })
 
 test('snapshot of the todo list', async ({ page }) => {
-  await page.goto('localhost:5173')
+  await page.goto('localhost:4173')
 
   // Fill in the new todo input with the value "buy milk"
   await page.getByLabel('Add a Todo').fill('buy milk 1')
@@ -76,7 +76,7 @@ test('snapshot of the todo list', async ({ page }) => {
 })
 
 test('drag and drop', async ({ page }) => {
-  await page.goto('localhost:5173')
+  await page.goto('localhost:4173')
 
   // Fill in the new todo input with the value "buy milk"
   await page.getByLabel('Add a Todo').fill('buy milk 1')
